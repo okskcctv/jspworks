@@ -7,16 +7,10 @@ import java.sql.SQLException;
 public class JDBCTest {
 
 	public static void main(String[] args) {
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String username = "c##jweb";
-		String password = "54321";
-		
 		Connection conn = null;
 		
 		try {
-			Class.forName(driverClass);
-			conn = DriverManager.getConnection(url, username, password);
+			conn = JDBCUtil.getConnection();
 			System.out.println("연결 성공");
 		} catch (Exception e) {
 			System.out.println("연결 실패");

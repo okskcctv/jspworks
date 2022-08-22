@@ -10,6 +10,7 @@
 	<% if(session.getAttribute("sessionId") == null){ %>
 		<ul>
 			<li><a href="/main.jsp">Home</a></li>
+			<li><a href="/board/boardList.jsp">게시판</a></li>
 			<li><a href="/loginMember.jsp">로그인</a></li>
 			<li><a href="/memberForm.jsp">회원가입</a></li>
 			<li><a href="/memberList.jsp">회원목록</a></li>

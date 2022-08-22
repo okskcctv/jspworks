@@ -16,8 +16,8 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO t_board(bnum, title, content, memberId)"
-				+ "VALUES (b_seq.nextval, ?, ?, ?)";
+		String sql = "INSERT INTO t_board(title, content, memberId)"
+				+ "VALUES (?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, board.getTitle());
@@ -31,7 +31,31 @@ public class BoardDAO {
 		}
 	}
 	
+	// 게시글 총 개수
+	public int getBoardCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int total = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			String sql = "SELECT COUNT(*) total FROM t_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt("total");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return total;
+	}
+	
 	// 게시글 목록 조회
+	/*
 	public ArrayList<Board> getListAll(){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -43,6 +67,39 @@ public class BoardDAO {
 		String sql = "SELECT * FROM t_board ORDER BY bnum DESC";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBnum(rs.getInt("bnum"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setRegDate(rs.getDate("regdate"));
+				board.setMemberId(rs.getString("memberId"));
+				boardList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return boardList;
+	}
+	*/
+	
+	// 페이징 처리
+	public ArrayList<Board> getListAll(int startRow, int pageSize){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		conn = JDBCUtil.getConnection();
+		String sql = "SELECT * FROM t_board ORDER BY bnum DESC LIMIT ?, ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Board board = new Board();

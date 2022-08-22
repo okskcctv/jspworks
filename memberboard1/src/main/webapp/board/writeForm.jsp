@@ -7,6 +7,16 @@
 <title>글쓰기</title>
 <link rel="stylesheet" href="../resources/css/common.css">
 <script src="../resources/js/script.js"></script>
+<%
+	if(session.getAttribute("sessionId") == null){
+%>
+<script>
+	alert("로그인 후 이용해 주세요.");
+	location.href = "/loginMember.jsp";
+</script>
+<%
+	}else{
+%>
 </head>
 <body>
 	<iframe name="hid" style="display:none"></iframe>
@@ -34,5 +44,6 @@
 		</div>
 	</div>
 	<jsp:include page="../footer.jsp" />
+	<% } %>
 </body>
 </html>
