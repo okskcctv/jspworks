@@ -20,7 +20,7 @@
 					<c:otherwise>
 						<li style="padding-top:7px; color:#eee">[<c:out value="${sessionId}" /> 님]</li>
 						<li class="nav-item">
-							<a href="/member/logoutMember.jsp" class="nav-link">로그아웃</a>
+							<a href="/member/logout.jsp" class="nav-link">로그아웃</a>
 						</li>
 						<li class="nav-item">
 							<a href="/member/updateMember.jsp" class="nav-link">회원 수정</a>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	session.invalidate();
+	session.invalidate();	// 모든 세션 삭제
 
-	response.sendRedirect("addProduct.jsp");
+	response.sendRedirect("./loginMember.jsp");
 %>

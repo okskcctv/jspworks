@@ -36,6 +36,7 @@
 		user = "root"
 		password = "12345"
 	/>
+	
 	<sql:update dataSource="${dataSource}" var="resultSet">
 		INSERT INTO member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 		<sql:param value="<%=id %>"/>
